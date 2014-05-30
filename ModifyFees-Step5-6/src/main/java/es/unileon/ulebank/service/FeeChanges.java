@@ -12,7 +12,7 @@ public class FeeChanges {
     protected final Log logger = LogFactory.getLog(getClass());
 
     @Min(3)
-	@Max(60)
+    @Max(60)
 	private int numberOfFees;
 
 	public void setNumberOfFees(int i) {

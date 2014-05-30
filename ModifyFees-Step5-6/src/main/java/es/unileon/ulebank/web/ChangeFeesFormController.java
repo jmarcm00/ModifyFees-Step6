@@ -46,7 +46,7 @@ public class ChangeFeesFormController {
 		
         int numFees = changes.getNumberOfFees();
         logger.info("Number of fees set to " + numFees);
-System.out.println(loanManager.getLoan().getAmortizationTime());
+        
         loanManager.setNumberOfFees(numFees);
 
         return "redirect:/changeNumFees.htm";
