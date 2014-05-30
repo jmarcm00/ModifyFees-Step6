@@ -1,0 +1,1 @@
+INSERT INTO loan (id, money, interest, numFees) values(1, 3000.00, 0.05, 12);
