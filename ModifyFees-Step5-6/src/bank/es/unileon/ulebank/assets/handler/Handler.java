@@ -6,5 +6,6 @@ package es.unileon.ulebank.assets.handler;
  */
 public interface Handler {
 	public int compareTo(Handler another);
+
 	public String toString();
 }

@@ -8,11 +8,11 @@ import org.apache.commons.logging.LogFactory;
 
 public class FeeChanges {
 
-    /** Logger for this class and subclasses */
-    protected final Log logger = LogFactory.getLog(getClass());
+	/** Logger for this class and subclasses */
+	protected final Log logger = LogFactory.getLog(getClass());
 
-    @Min(3)
-    @Max(60)
+	@Min(3)
+	@Max(60)
 	private int numberOfFees;
 
 	public void setNumberOfFees(int i) {
@@ -23,5 +23,5 @@ public class FeeChanges {
 	public int getNumberOfFees() {
 		return numberOfFees;
 	}
-	
+
 }

@@ -127,7 +127,7 @@ public class Loan implements FinancialProduct {
 	 * Fixed fee that you have to pay every month
 	 */
 	private double periodFee;
-	
+
 	/**
 	 * this is the task lisk for put the commands
 	 */
@@ -141,18 +141,19 @@ public class Loan implements FinancialProduct {
 	 */
 
 	private double interestOfBank;
-	
+
 	/**
 	 * This is the loan description for the client
 	 */
 	private String description;
-	
-	public Loan(double money, double interest, PaymentPeriod paymentPeriod, int numFees){
+
+	public Loan(double money, double interest, PaymentPeriod paymentPeriod,
+			int numFees) {
 		this.debt = money;
 		this.interest = interest;
 		this.paymentPeriod = paymentPeriod;
 		this.amortizationTime = numFees;
-		
+
 		this.loanHistory = new LoanHistory();
 		try {
 			this.cancelCommission = new LoanCommission(0, false);
@@ -162,9 +163,9 @@ public class Loan implements FinancialProduct {
 			this.openningCommission = new LoanCommission(0, false);
 			this.amortizedCommission = new LoanCommission(0, false);
 		} catch (InvalidFeeException e) {
-			
+
 		}
-		
+
 		this.payments = new ArrayList<ScheduledPayment>();
 		this.initialCapital = this.debt;
 		this.strategy = new FrenchMethod(this);
@@ -172,15 +173,15 @@ public class Loan implements FinancialProduct {
 		this.payments = this.strategy.doCalculationOfPayments();
 		this.loanHistory.addAllPayments(this.payments);
 		this.arrayListIndex = 0;
-		
-		this.creatinngDate=Calendar.getInstance().getTime();
+
+		this.creatinngDate = Calendar.getInstance().getTime();
 		this.debt = this.openningCommission.getFee(this.debt);
 		this.debt = this.studyCommission.getFee(this.debt);
-		this.taskList=new TaskList();
+		this.taskList = new TaskList();
 	}
-	
-	public Loan(){
-		
+
+	public Loan() {
+
 	}
 
 	/**
@@ -195,8 +196,8 @@ public class Loan implements FinancialProduct {
 	 * @throws LoanException
 	 */
 	public Loan(Handler idLoan, double initialCapital, double interest,
-			PaymentPeriod paymentPeriod, int amortizationTime, Account account, String description)
-			throws LoanException {
+			PaymentPeriod paymentPeriod, int amortizationTime, Account account,
+			String description) throws LoanException {
 		StringBuffer exceptionMessage = new StringBuffer();
 
 		this.loanHistory = new LoanHistory();
@@ -213,13 +214,12 @@ public class Loan implements FinancialProduct {
 
 		this.idLoan = idLoan;
 
-
 		if (initialCapital < 100000000) {
 			this.debt = initialCapital;
-		}else{
-			exceptionMessage.append("The bank can not lend this amount of money");
+		} else {
+			exceptionMessage
+					.append("The bank can not lend this amount of money");
 		}
-		
 
 		if (interest >= 0 && interest <= 1) {
 			this.interest = interest;
@@ -228,7 +228,6 @@ public class Loan implements FinancialProduct {
 			exceptionMessage
 					.append("The interest value must be a value between 0 and 1\n");
 		}
-		
 
 		this.paymentPeriod = paymentPeriod;
 		this.amortizationTime = amortizationTime;
@@ -244,13 +243,12 @@ public class Loan implements FinancialProduct {
 		if (exceptionMessage.length() > 1)
 			throw new LoanException(exceptionMessage.toString());
 
-		
 		Calendar.getInstance().setTimeInMillis(Time.getInstance().getTime());
-		this.creatinngDate=Calendar.getInstance().getTime();
+		this.creatinngDate = Calendar.getInstance().getTime();
 		this.debt = this.openningCommission.getFee(this.debt);
 		this.debt = this.studyCommission.getFee(this.debt);
-		this.taskList=new TaskList();
-		
+		this.taskList = new TaskList();
+
 	}
 
 	/**
@@ -265,9 +263,10 @@ public class Loan implements FinancialProduct {
 	 */
 	public Loan(Handler idLoan, double initialCapital,
 			InterestRate interestRate, PaymentPeriod paymentPeriod,
-			int amortizationTime, Account account,String description) throws LoanException {
+			int amortizationTime, Account account, String description)
+			throws LoanException {
 		this(idLoan, initialCapital, interestRate.getInterestRate(),
-				paymentPeriod, amortizationTime, account,description);
+				paymentPeriod, amortizationTime, account, description);
 
 	}
 
@@ -450,7 +449,7 @@ public class Loan implements FinancialProduct {
 	public void setAmortizationTime(int amortizationTime) {
 		this.amortizationTime = amortizationTime;
 	}
-	
+
 	public String getDescription() {
 		return this.description;
 	}

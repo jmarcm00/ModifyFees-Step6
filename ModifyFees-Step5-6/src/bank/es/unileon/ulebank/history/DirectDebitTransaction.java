@@ -11,12 +11,13 @@ import java.util.Date;
  */
 public class DirectDebitTransaction extends Transaction {
 
-    public DirectDebitTransaction(double amount, Date date, String subject) {
-        super(amount, date, subject);
-    }
+	public DirectDebitTransaction(double amount, Date date, String subject) {
+		super(amount, date, subject);
+	}
 
-    public DirectDebitTransaction(double amount, Date date, String subject, DetailedInformation info) {
-        super(amount, date, subject, info);
-    }
+	public DirectDebitTransaction(double amount, Date date, String subject,
+			DetailedInformation info) {
+		super(amount, date, subject, info);
+	}
 
 }

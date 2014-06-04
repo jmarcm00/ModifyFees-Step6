@@ -10,21 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="loan") 
+@Table(name = "loan")
 public class Product implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-    private double money;
-    private double interest;
-    private int numFees;
-    
-    public double getMoney() {
+	private double money;
+	private double interest;
+	private int numFees;
+
+	public double getMoney() {
 		return money;
 	}
 
@@ -48,14 +48,12 @@ public class Product implements Serializable {
 		this.numFees = numFees;
 	}
 
-	public Integer getId()
-    {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id)
-    {
-        this.id = id;
-    } 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 }

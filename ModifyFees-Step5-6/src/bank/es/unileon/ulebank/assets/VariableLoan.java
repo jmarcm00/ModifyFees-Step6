@@ -14,8 +14,8 @@ import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.taskList.Task;
 import es.unileon.ulebank.time.Time;
 
-public class VariableLoan extends Loan{
-	
+public class VariableLoan extends Loan {
+
 	/**
 	 * This is the interest rate of credit
 	 */
@@ -28,26 +28,30 @@ public class VariableLoan extends Loan{
 	 * this is the day of last racalculate date
 	 */
 	private Date lastRecalculateInterest;
-	
+
 	public VariableLoan(Handler idLoan, double initialCapital, double interest,
-			PaymentPeriod paymentPeriod, int amortizationTime, Account account,String description,
-			InterestRate interestRate, PaymentPeriod recalcOfInterset)
-			throws LoanException {
-		super(idLoan, initialCapital, interest, paymentPeriod, amortizationTime,
-				account,description);
-		
-		this.interestOfRate=interestRate;
-		this.recalcOfInterest=recalcOfInterset;
-		this.setInterest(this.getInterestOfBank()+interestRate.getInterestRate());
-		this.lastRecalculateInterest=this.getCreatinngDate();
+			PaymentPeriod paymentPeriod, int amortizationTime, Account account,
+			String description, InterestRate interestRate,
+			PaymentPeriod recalcOfInterset) throws LoanException {
+		super(idLoan, initialCapital, interest, paymentPeriod,
+				amortizationTime, account, description);
+
+		this.interestOfRate = interestRate;
+		this.recalcOfInterest = recalcOfInterset;
+		this.setInterest(this.getInterestOfBank()
+				+ interestRate.getInterestRate());
+		this.lastRecalculateInterest = this.getCreatinngDate();
 		this.recalcInterestRate();
 	}
-	
-	public void recalcInterestRate(){
-		this.setInterest(this.getInterestOfBank()+this.interestOfRate.getInterestRate());
-		UpdateInterestCommand updateinterestCommand=new UpdateInterestCommand(this,(Handler) new GenericHandler("a"));
-		Date commandDate=this.forwardDate(this.lastRecalculateInterest, this.recalcOfInterest);
-		Task task=new Task(commandDate, (Command) updateinterestCommand);
+
+	public void recalcInterestRate() {
+		this.setInterest(this.getInterestOfBank()
+				+ this.interestOfRate.getInterestRate());
+		UpdateInterestCommand updateinterestCommand = new UpdateInterestCommand(
+				this, (Handler) new GenericHandler("a"));
+		Date commandDate = this.forwardDate(this.lastRecalculateInterest,
+				this.recalcOfInterest);
+		Task task = new Task(commandDate, (Command) updateinterestCommand);
 		this.getTaskList().addTask(task);
 	}
 

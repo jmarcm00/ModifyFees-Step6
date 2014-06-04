@@ -15,32 +15,36 @@ import es.unileon.ulebank.domain.Product;
 @Repository(value = "productDao")
 public class JPALoanDao implements LoanDao {
 
-    private EntityManager em = null;
+	private EntityManager em = null;
 
-    /*
-     * Sets the entity manager.
-     */
-    @PersistenceContext
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
-    }
+	/*
+	 * Sets the entity manager.
+	 */
+	@PersistenceContext
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
+	}
 
-    @Transactional(readOnly = true)
-    @SuppressWarnings("unchecked")
-    public List<Product> getProductList() {
-        return em.createQuery("select p from Product p order by p.id").getResultList();
-    }
+	@Transactional(readOnly = true)
+	@SuppressWarnings("unchecked")
+	public List<Product> getProductList() {
+		return em.createQuery("select p from Product p order by p.id")
+				.getResultList();
+	}
 
-    @Transactional(readOnly = false)
-    public void saveProduct(Product prod) {
-        em.merge(prod);
-    }
+	@Transactional(readOnly = false)
+	public void saveProduct(Product prod) {
+		em.merge(prod);
+	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Loan getLoan() {
-		Product p = (Product) em.createQuery("select p from Product p order by p.id").getSingleResult();
-		
-		return new Loan(p.getMoney(), p.getInterest(), PaymentPeriod.MONTHLY, p.getNumFees());
+		Product p = (Product) em.createQuery(
+				"select p from Product p order by p.id").getSingleResult();
+
+		return new Loan(p.getMoney(), p.getInterest(), PaymentPeriod.MONTHLY,
+				p.getNumFees());
 	}
 
 }

@@ -21,27 +21,26 @@ import es.unileon.ulebank.service.LoanManager;
 @Controller
 public class FeeController {
 
-    protected final Log logger = LogFactory.getLog(getClass());
+	protected final Log logger = LogFactory.getLog(getClass());
 
-    @Autowired
-    private LoanManager loanManager;
+	@Autowired
+	private LoanManager loanManager;
 
-    @RequestMapping(value="/changeNumFees.htm")
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	@RequestMapping(value = "/changeNumFees.htm")
+	public ModelAndView handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
-    	String now = (new Date()).toString();
-        logger.info("Returning changeNumFees view with " + now);
+		String now = (new Date()).toString();
+		logger.info("Returning changeNumFees view with " + now);
 
-        Map<String, Object> myModel = new HashMap<String, Object>();
-        myModel.put("now", now);
-        myModel.put("products", this.loanManager.getLoan());
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("now", now);
+		myModel.put("products", this.loanManager.getLoan());
 
-        return new ModelAndView("changeNumFees", "model", myModel);
-    }
+		return new ModelAndView("changeNumFees", "model", myModel);
+	}
 
-
-    public void setLoanManager(LoanManager loanManager) {
-        this.loanManager = loanManager;
-    }
+	public void setLoanManager(LoanManager loanManager) {
+		this.loanManager = loanManager;
+	}
 }

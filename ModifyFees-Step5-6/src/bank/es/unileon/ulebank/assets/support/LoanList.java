@@ -45,10 +45,10 @@ public class LoanList<T extends Loan> {
 	 *         return false
 	 */
 	public boolean addLoan(T loan) {
-		if(getLoan(loan.getId()) == null) //if no exist
+		if (getLoan(loan.getId()) == null) // if no exist
 			return this.loans.add(loan);
 		else
-			return false; //if exists
+			return false; // if exists
 	}
 
 	/**
@@ -103,21 +103,26 @@ public class LoanList<T extends Loan> {
 		for (int i = 0; i < this.loans.size(); i++) {
 			Loan loan = this.loans.get(i);
 			ArrayList<ScheduledPayment> payments = loan.getPayments();
-			
+
 			for (ScheduledPayment payment : payments) {
-				//equal day
-				boolean doPayment = (getDay(this.date) == getDay(payment.getExpiration()));
-				//equal month
-				doPayment = doPayment && (getMonth(this.date) == getMonth(payment.getExpiration()));
-				//equal year
-				doPayment = doPayment && (getYear(this.date) == getYear(payment.getExpiration()));
-				
+				// equal day
+				boolean doPayment = (getDay(this.date) == getDay(payment
+						.getExpiration()));
+				// equal month
+				doPayment = doPayment
+						&& (getMonth(this.date) == getMonth(payment
+								.getExpiration()));
+				// equal year
+				doPayment = doPayment
+						&& (getYear(this.date) == getYear(payment
+								.getExpiration()));
+
 				if (doPayment) {
-					
+
 					try {
 						loan.paid(payment.getId());
 					} catch (LoanException e) {
-						
+
 					}
 				}
 			}
@@ -245,69 +250,77 @@ public class LoanList<T extends Loan> {
 		Calendar newCalendar = new GregorianCalendar(year, month, day);
 		setDate(newCalendar.getTime());
 	}
-	
+
 	/**
 	 * Method to get the number of loans
+	 * 
 	 * @return number of loans
 	 */
-	public int  numberOfLoans() {
+	public int numberOfLoans() {
 		return this.loans.size();
 	}
-	
+
 	/**
-	 * Method to get the payments
-	 * It return the payments or null if not found
-	 * @param handler of the loan
+	 * Method to get the payments It return the payments or null if not found
+	 * 
+	 * @param handler
+	 *            of the loan
 	 * @return payments of this loan or null if not exists
 	 */
 	public ArrayList<ScheduledPayment> getPayments(Handler handler) {
 		ArrayList<ScheduledPayment> payments = null;
 		boolean found = false;
-		for(int i=0; i<this.loans.size() && !found; i++) {
+		for (int i = 0; i < this.loans.size() && !found; i++) {
 			Loan loan = this.loans.get(i);
-			if(handler.compareTo(loan.getId()) == 0){
+			if (handler.compareTo(loan.getId()) == 0) {
 				payments = loan.getPayments();
 				found = true;
 			}
 		}
-		
+
 		return payments;
 	}
+
 	/**
 	 * Method to get a payment of a particular loan and a concrete date.
+	 * 
 	 * @return the payment if exixts or null if not
 	 */
 	public ScheduledPayment getPayment(Handler loanId, Date date) {
 		ScheduledPayment payment = null;
-		
-		ArrayList<ScheduledPayment> payments = getPayments(loanId);
-		
-		if(payments != null){
-			boolean found = false;
-			for(int i=0; i<payments.size() && !found; i++){
-				ScheduledPayment lookForPayment = payments.get(i);
-				
-				//equal day
-				boolean paymentIsValid = (getDay(date) == getDay(lookForPayment.getExpiration()));
-				//equal month
-				paymentIsValid = paymentIsValid && (getMonth(date) == getMonth(lookForPayment.getExpiration()));
-				//equal year
-				paymentIsValid = paymentIsValid && (getYear(date) == getYear(lookForPayment.getExpiration()));
-				
 
-				
-				if(paymentIsValid){
+		ArrayList<ScheduledPayment> payments = getPayments(loanId);
+
+		if (payments != null) {
+			boolean found = false;
+			for (int i = 0; i < payments.size() && !found; i++) {
+				ScheduledPayment lookForPayment = payments.get(i);
+
+				// equal day
+				boolean paymentIsValid = (getDay(date) == getDay(lookForPayment
+						.getExpiration()));
+				// equal month
+				paymentIsValid = paymentIsValid
+						&& (getMonth(date) == getMonth(lookForPayment
+								.getExpiration()));
+				// equal year
+				paymentIsValid = paymentIsValid
+						&& (getYear(date) == getYear(lookForPayment
+								.getExpiration()));
+
+				if (paymentIsValid) {
 					payment = lookForPayment;
 					found = true;
 				}
 			}
 		}
-		
+
 		return payment;
 	}
-	
+
 	/**
 	 * return the year of a date
+	 * 
 	 * @param date
 	 * @return year
 	 */
@@ -316,9 +329,10 @@ public class LoanList<T extends Loan> {
 		calendar.setTime(date);
 		return calendar.get(Calendar.YEAR);
 	}
-	
+
 	/**
 	 * return the month of a date
+	 * 
 	 * @param date
 	 * @return month
 	 */
@@ -327,9 +341,10 @@ public class LoanList<T extends Loan> {
 		calendar.setTime(date);
 		return calendar.get(Calendar.MONTH);
 	}
-	
+
 	/**
 	 * return the day of a date
+	 * 
 	 * @param date
 	 * @return day
 	 */
@@ -338,24 +353,25 @@ public class LoanList<T extends Loan> {
 		calendar.setTime(date);
 		return calendar.get(Calendar.DATE);
 	}
-	
-	
+
 	/**
-	 * Method that return the loan is exists  or null if not
-	 * @param idLoan handler of the loan
+	 * Method that return the loan is exists or null if not
+	 * 
+	 * @param idLoan
+	 *            handler of the loan
 	 * @return null if not found and the loan is exists
 	 */
 	public Loan getLoan(Handler idLoan) {
 		Loan loan = null;
 		boolean found = false;
-		for(int i=0; i<this.loans.size() && !found; i++){
-			if(this.loans.get(i).getId().compareTo(idLoan) == 0) {
+		for (int i = 0; i < this.loans.size() && !found; i++) {
+			if (this.loans.get(i).getId().compareTo(idLoan) == 0) {
 				loan = this.loans.get(i);
 				found = true;
 			}
 		}
-		
+
 		return loan;
-		
+
 	}
 }

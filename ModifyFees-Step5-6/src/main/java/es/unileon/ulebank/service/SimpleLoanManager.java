@@ -11,33 +11,34 @@ import es.unileon.ulebank.repository.LoanDao;
 
 /**
  * Simple Fee Manager Class
+ * 
  * @brief Class which manages the loan
  */
 @Component
 public class SimpleLoanManager implements LoanManager {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Autowired
-    private LoanDao loanDao;
+	@Autowired
+	private LoanDao loanDao;
 
-    public void setProductDao(LoanDao loanDao) {
-        this.loanDao = loanDao;
-    }
+	public void setProductDao(LoanDao loanDao) {
+		this.loanDao = loanDao;
+	}
 
-    public List<Product> getProducts() {
-        return loanDao.getProductList();
-    }
+	public List<Product> getProducts() {
+		return loanDao.getProductList();
+	}
 
-    public void setNumberOfFees(int numFees) {
-        List<Product> products = loanDao.getProductList();
-        if (products != null) {
-            for (Product product : products) {
-                product.setNumFees(numFees);
-                loanDao.saveProduct(product);
-            }
-        }
-    }
+	public void setNumberOfFees(int numFees) {
+		List<Product> products = loanDao.getProductList();
+		if (products != null) {
+			for (Product product : products) {
+				product.setNumFees(numFees);
+				loanDao.saveProduct(product);
+			}
+		}
+	}
 
 	@Override
 	public Loan getLoan() {

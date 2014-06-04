@@ -7,10 +7,10 @@ import es.unileon.ulebank.domain.Product;
 
 public interface LoanDao {
 
-    public List<Product> getProductList();
-    
-    public Loan getLoan();
+	public List<Product> getProductList();
 
-    public void saveProduct(Product prod);
+	public Loan getLoan();
+
+	public void saveProduct(Product prod);
 
 }

@@ -1,6 +1,8 @@
 package es.unileon.ulebank.assets.financialproducts;
+
 /**
  * Different types of euribor than someone can choose in his loan
+ * 
  * @author CarlitosMayo
  *
  */

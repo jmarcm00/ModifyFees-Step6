@@ -7,13 +7,13 @@ package es.unileon.ulebank.history.conditions;
  *
  * @author runix
  */
-public class WrongArgsException extends Exception{
-    
-    /**
-     *
-     * @param msg
-     */
-    public WrongArgsException(String msg) {
-        super(msg);
-    }
+public class WrongArgsException extends Exception {
+
+	/**
+	 *
+	 * @param msg
+	 */
+	public WrongArgsException(String msg) {
+		super(msg);
+	}
 }

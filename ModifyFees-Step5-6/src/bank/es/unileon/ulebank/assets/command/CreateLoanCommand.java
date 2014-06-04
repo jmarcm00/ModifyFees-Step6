@@ -30,7 +30,7 @@ public class CreateLoanCommand implements Command {
 	public CreateLoanCommand(Handler idCommand, Handler idLoan,
 			double initialCapital, double interest,
 			PaymentPeriod paymentPeriod, int amortizationTime,
-			LoanList<Loan> loanList,String description) {
+			LoanList<Loan> loanList, String description) {
 
 		this.idCommand = idCommand;
 		this.idLoan = idLoan;
@@ -51,7 +51,7 @@ public class CreateLoanCommand implements Command {
 		try {
 			this.loan = new Loan(this.idLoan, this.initialCapital,
 					this.interest, this.paymentPeriod, this.amortizationTime,
-					this.account,this.description);
+					this.account, this.description);
 		} catch (LoanException e) {
 		}
 

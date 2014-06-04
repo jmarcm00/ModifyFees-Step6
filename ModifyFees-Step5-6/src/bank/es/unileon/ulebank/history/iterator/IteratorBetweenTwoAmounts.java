@@ -14,14 +14,16 @@ import java.util.List;
  * @author runix
  * @param <T>
  */
-public class IteratorBetweenTwoAmounts<T extends Transaction> extends ConditionalIterator<T> {
+public class IteratorBetweenTwoAmounts<T extends Transaction> extends
+		ConditionalIterator<T> {
 
-    public IteratorBetweenTwoAmounts(List<T> elements, double min, double max) throws WrongArgsException {
-        super(new ConditionTransactionBetweenTwoAmounts<T>(min, max), elements);
-    }
+	public IteratorBetweenTwoAmounts(List<T> elements, double min, double max)
+			throws WrongArgsException {
+		super(new ConditionTransactionBetweenTwoAmounts<T>(min, max), elements);
+	}
 
-    public IteratorBetweenTwoAmounts(Iterator<T> iterator, double min, double max
-    ) throws WrongArgsException {
-        super(new ConditionTransactionBetweenTwoAmounts<T>(min, max), iterator);
-    }
+	public IteratorBetweenTwoAmounts(Iterator<T> iterator, double min,
+			double max) throws WrongArgsException {
+		super(new ConditionTransactionBetweenTwoAmounts<T>(min, max), iterator);
+	}
 }

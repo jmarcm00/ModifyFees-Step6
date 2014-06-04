@@ -15,7 +15,7 @@ public class LoanIterator implements Iterator<ScheduledPayment> {
 	 * Position that a fee are stored in the list
 	 */
 	private int position;
-	
+
 	public LoanIterator(List<ScheduledPayment> loanPayments) {
 		this.loanPayments = loanPayments;
 		this.position = 0;
@@ -26,7 +26,8 @@ public class LoanIterator implements Iterator<ScheduledPayment> {
 	 */
 	@Override
 	public boolean hasNext() {
-		if(this.position < this.loanPayments.size()) return true;
+		if (this.position < this.loanPayments.size())
+			return true;
 		return false;
 	}
 
@@ -36,11 +37,11 @@ public class LoanIterator implements Iterator<ScheduledPayment> {
 	@Override
 	public ScheduledPayment next() {
 		ScheduledPayment payment = null;
-		try{
+		try {
 			payment = this.loanPayments.get(this.position);
 			this.position++;
-		}catch(Exception ex) {
-			
+		} catch (Exception ex) {
+
 		}
 
 		return payment;
@@ -48,7 +49,7 @@ public class LoanIterator implements Iterator<ScheduledPayment> {
 
 	@Override
 	public void remove() {
-		
+
 	}
 
 }

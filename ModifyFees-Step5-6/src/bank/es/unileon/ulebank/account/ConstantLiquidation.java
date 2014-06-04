@@ -15,42 +15,44 @@ import java.util.Iterator;
  */
 public class ConstantLiquidation implements LiquidationStrategy {
 
-    /**
+	/**
      *
      */
-    private String subject;
-    /**
+	private String subject;
+	/**
      *
      */
-    private Handler id;
-    /**
+	private Handler id;
+	/**
      *
      */
-    private double amount;
+	private double amount;
 
-    /**
-     *
-     * @param subject
-     * @param id
-     * @param amount
-     */
-    public ConstantLiquidation(String subject, Handler id, double amount) {
-        this.subject = subject;
-        this.id = id;
-        this.amount = amount;
-    }
+	/**
+	 *
+	 * @param subject
+	 * @param id
+	 * @param amount
+	 */
+	public ConstantLiquidation(String subject, Handler id, double amount) {
+		this.subject = subject;
+		this.id = id;
+		this.amount = amount;
+	}
 
-    @Override
-    public Handler getID() {
-        return this.id;
-    }
+	@Override
+	public Handler getID() {
+		return this.id;
+	}
 
-    @Override
-    public Transaction doLiquidation(Iterator<Transaction> transactions, Date min, Date max) {
-        long actualTime = Time.getInstance().getTime();
-        Transaction t = new GenericTransaction(this.amount, new Date(actualTime), subject, null);
-        t.setEffectiveDate(new Date(actualTime));
-        return t;
-    }
+	@Override
+	public Transaction doLiquidation(Iterator<Transaction> transactions,
+			Date min, Date max) {
+		long actualTime = Time.getInstance().getTime();
+		Transaction t = new GenericTransaction(this.amount,
+				new Date(actualTime), subject, null);
+		t.setEffectiveDate(new Date(actualTime));
+		return t;
+	}
 
 }

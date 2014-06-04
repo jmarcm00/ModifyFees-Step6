@@ -18,67 +18,75 @@ import es.unileon.ulebank.service.LoanManager;
 
 /**
  * Class Controller of the page feeLimits.jsp
- * @brief Concrete controller of feeLimits.jsp which change the number of fees in the loan.
+ * 
+ * @brief Concrete controller of feeLimits.jsp which change the number of fees
+ *        in the loan.
  */
 @Controller
-@RequestMapping(value="/feeLimits.htm")
+@RequestMapping(value = "/feeLimits.htm")
 public class ChangeFeesFormController {
 
-    /** Logger for this class and subclasses */
-    protected final Log logger = LogFactory.getLog(getClass());
+	/** Logger for this class and subclasses */
+	protected final Log logger = LogFactory.getLog(getClass());
 
-    /** Manager de loan */
-    @Autowired
-    private LoanManager loanManager;
+	/** Manager de loan */
+	@Autowired
+	private LoanManager loanManager;
 
-    /**
-     * Method that obtains the data of the form in feeLimits.jsp and save the changes in the loan
-     * @param changes
-     * @param result
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(@Valid FeeChanges changes, BindingResult result)
-    {
-        if (result.hasErrors()) {
-            return "feeLimits";
-        }
-		
-        int numFees = changes.getNumberOfFees();
-        logger.info("Number of fees set to " + numFees);
-        
-        loanManager.setNumberOfFees(numFees);
+	/**
+	 * Method that obtains the data of the form in feeLimits.jsp and save the
+	 * changes in the loan
+	 * 
+	 * @param changes
+	 * @param result
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST)
+	public String onSubmit(@Valid FeeChanges changes, BindingResult result) {
+		if (result.hasErrors()) {
+			return "feeLimits";
+		}
 
-        return "redirect:/changeNumFees.htm";
-    }
+		int numFees = changes.getNumberOfFees();
+		logger.info("Number of fees set to " + numFees);
 
-    /**
-     * Method that sends the number of fees in the loan to the form in feeLimits.jsp
-     * @param request
-     * @return
-     * @throws ServletException
-     */
-    @RequestMapping(method = RequestMethod.GET)
-    protected FeeChanges formBackingObject(HttpServletRequest request) throws ServletException {
-        FeeChanges fees = new FeeChanges();
-        fees.setNumberOfFees(loanManager.getLoan().getAmortizationTime());
-        return fees;
-    }
+		loanManager.setNumberOfFees(numFees);
 
-    /**
-     * Setter of the manager
-     * @param feeManager
-     */
-    public void setLoanManager(LoanManager loanManager) {
-        this.loanManager = loanManager;
-    }
+		return "redirect:/changeNumFees.htm";
+	}
 
-    /**
-     * Getter of the manager
-     * @return
-     */
-    public LoanManager getLoanManager() {
-        return loanManager;
-    }
+	/**
+	 * Method that sends the number of fees in the loan to the form in
+	 * feeLimits.jsp
+	 * 
+	 * @param request
+	 * @return
+	 * @throws ServletException
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	protected FeeChanges formBackingObject(HttpServletRequest request)
+			throws ServletException {
+		FeeChanges fees = new FeeChanges();
+		fees.setNumberOfFees(loanManager.getLoan().getAmortizationTime());
+		return fees;
+	}
+
+	/**
+	 * Setter of the manager
+	 * 
+	 * @param feeManager
+	 */
+	public void setLoanManager(LoanManager loanManager) {
+		this.loanManager = loanManager;
+	}
+
+	/**
+	 * Getter of the manager
+	 * 
+	 * @return
+	 */
+	public LoanManager getLoanManager() {
+		return loanManager;
+	}
 
 }

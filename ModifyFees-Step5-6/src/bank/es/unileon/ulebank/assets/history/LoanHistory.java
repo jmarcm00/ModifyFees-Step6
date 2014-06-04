@@ -50,15 +50,15 @@ public class LoanHistory {
 	 *         payment is not deleted from the history
 	 */
 	public boolean removePayment(ScheduledPayment payment) {
-		//TODO Include a comprobation that payment exists
+		// TODO Include a comprobation that payment exists
 		return this.payments.remove(payment);
 	}
 
 	/**
 	 * 
-	 * @param startDate 
+	 * @param startDate
 	 * @param endDate
-	 * @return 
+	 * @return
 	 */
 
 	public LoanIteratorDates iterator(Date startDate, Date endDate) {
@@ -71,6 +71,7 @@ public class LoanHistory {
 
 	/**
 	 * Method to know how many payments are stored in the loans history
+	 * 
 	 * @return number of payments stored in the history
 	 */
 	public int historySize() {

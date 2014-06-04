@@ -35,22 +35,26 @@ public class LoanIdentificationNumberCode {
 	private int checkDigit;
 
 	public static final String alphanumericCharsAllowed = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
-	
-	public enum PermittedTypes{LN, MG}; //permitted types
-	
-	
+
+	public enum PermittedTypes {
+		LN, MG
+	}; // permitted types
+
 	/**
-	 * The constructor receives the type, if is a loan or mortgage and the country code.
+	 * The constructor receives the type, if is a loan or mortgage and the
+	 * country code.
 	 * 
-	 * @param type Type (loan or credit)
-	 * @param countryCode Country code.
+	 * @param type
+	 *            Type (loan or credit)
+	 * @param countryCode
+	 *            Country code.
 	 * @throws LINCMalformedException
 	 */
 	public LoanIdentificationNumberCode(String type, String countryCode)
 			throws LINCMalformedException {
-		
+
 		StringBuffer error = new StringBuffer();
-		
+
 		boolean countryCodeExist = false;
 		String[] countries = Locale.getISOCountries();
 		for (String country : countries) {
@@ -62,36 +66,39 @@ public class LoanIdentificationNumberCode {
 		if (!countryCodeExist) {
 			error.append("Country code not exist.\n");
 		}
-		
+
 		boolean typeExist = false;
 		PermittedTypes[] types = PermittedTypes.values();
-		for(PermittedTypes permittedType : types) {
-			if(permittedType.toString().equals(type)) {
+		for (PermittedTypes permittedType : types) {
+			if (permittedType.toString().equals(type)) {
 				typeExist = true;
 			}
 		}
-		
+
 		if (!typeExist) {
 			error.append("Type not exist.\n");
 		}
-		
-		if(error.length() > 0){
+
+		if (error.length() > 0) {
 			throw new LINCMalformedException(error.toString());
 		}
-		
+
 		this.type = type;
 		this.date = String.valueOf(Calendar.getInstance().get(Calendar.MONTH))
-				+ "-" + String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		
+				+ "-"
+				+ String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+
 		this.countryCode = countryCode;
 		this.randomCharacters = randomCharacters(5);
-		this.checkDigit = doCheckDigit(this.type + this.date + this.countryCode +this.randomCharacters);
+		this.checkDigit = doCheckDigit(this.type + this.date + this.countryCode
+				+ this.randomCharacters);
 	}
-	
+
 	/**
 	 * Returns an alphanumeric string of the specified length.
 	 * 
-	 * @param len Length of the string.
+	 * @param len
+	 *            Length of the string.
 	 * @return Random characters with the specific length.
 	 */
 	public String randomCharacters(int len) {
@@ -99,38 +106,40 @@ public class LoanIdentificationNumberCode {
 		StringBuilder sb = new StringBuilder(len);
 
 		for (int i = 0; i < len; i++) {
-			sb.append(alphanumericCharsAllowed.charAt(rnd.nextInt(alphanumericCharsAllowed.length())));
+			sb.append(alphanumericCharsAllowed.charAt(rnd
+					.nextInt(alphanumericCharsAllowed.length())));
 		}
 
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Method used to calculate the check digit.
+	 * 
 	 * @param code
 	 * @return Check digit.
 	 */
 	private int doCheckDigit(String code) {
 		char[] characters = code.toCharArray();
 		int sum = 0;
-		
-		for(char character : characters){
-			try{
-				int num = Integer.parseInt(String.valueOf(character));			
+
+		for (char character : characters) {
+			try {
+				int num = Integer.parseInt(String.valueOf(character));
 				sum = sum + num;
-			}catch(NumberFormatException ex){
+			} catch (NumberFormatException ex) {
 				int num = Character.valueOf(character);
 				sum = sum + num;
 			}
 		}
-		
-		return sum%9;
+
+		return sum % 9;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -169,6 +178,7 @@ public class LoanIdentificationNumberCode {
 
 	@Override
 	public String toString() {
-		return this.type + "-" + this.date + "-" + this.countryCode + "-" + this.randomCharacters + "-" + this.checkDigit;
+		return this.type + "-" + this.date + "-" + this.countryCode + "-"
+				+ this.randomCharacters + "-" + this.checkDigit;
 	}
 }

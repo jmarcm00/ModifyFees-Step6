@@ -11,12 +11,13 @@ package es.unileon.ulebank.iterator;
  */
 public interface Condition<T> {
 
-    /**
-     *
-     * @param t (Object to test)
-     *
-     * @return true if is valid, otherwise false
-     */
-    boolean test(T t);
+	/**
+	 *
+	 * @param t
+	 *            (Object to test)
+	 *
+	 * @return true if is valid, otherwise false
+	 */
+	boolean test(T t);
 
 }

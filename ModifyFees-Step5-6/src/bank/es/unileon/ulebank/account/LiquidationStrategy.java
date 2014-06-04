@@ -13,21 +13,23 @@ import java.util.Iterator;
  */
 public interface LiquidationStrategy {
 
-    /**
-     * Perform liquitadation based on account history.
-     *
-     * @param transactions ( The transactions for doing the liquidation )
-     * @param min
-     * @param max
-     *
-     * @return (The amount of money to pay )
-     */
-    public Transaction doLiquidation(Iterator<Transaction> transactions, Date min, Date max);
+	/**
+	 * Perform liquitadation based on account history.
+	 *
+	 * @param transactions
+	 *            ( The transactions for doing the liquidation )
+	 * @param min
+	 * @param max
+	 *
+	 * @return (The amount of money to pay )
+	 */
+	public Transaction doLiquidation(Iterator<Transaction> transactions,
+			Date min, Date max);
 
-    /**
-     * The liquidation strategy id.
-     *
-     * @return (the id)
-     */
-    public Handler getID();
+	/**
+	 * The liquidation strategy id.
+	 *
+	 * @return (the id)
+	 */
+	public Handler getID();
 }

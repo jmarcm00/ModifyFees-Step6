@@ -22,7 +22,7 @@ public class FrenchMethod implements StrategyLoan {
 	 * Object reference to the loan that wait calculating the fees
 	 */
 	private Loan loan;
-	
+
 	/**
 	 * Object with the date for do the payments
 	 */
@@ -119,9 +119,9 @@ public class FrenchMethod implements StrategyLoan {
 			fee = round(fee, 100);
 			amortized = round(amortized, 100);
 			interest = round(interest, 100);
-			
-			paymentsFrench.add(new ScheduledPayment(this.dateWrap.getDate(), fee,
-					amortized, interest, totalCapital));
+
+			paymentsFrench.add(new ScheduledPayment(this.dateWrap.getDate(),
+					fee, amortized, interest, totalCapital));
 			this.dateWrap.updateDate();
 		}
 

@@ -12,33 +12,32 @@ import java.util.Date;
  */
 public class Task {
 
-    
-    private final Command command;
+	private final Command command;
 
-    private final Date effectiveDate;
+	private final Date effectiveDate;
 
-    public Task(Date effectiveDate, Command command) {
-        this.effectiveDate = effectiveDate;
-        this.command = command;
-    }
+	public Task(Date effectiveDate, Command command) {
+		this.effectiveDate = effectiveDate;
+		this.command = command;
+	}
 
-    public Handler getID() {
-        return this.command.getID();
-    }
+	public Handler getID() {
+		return this.command.getID();
+	}
 
-    public void execute() {
-        this.command.execute();
-    }
+	public void execute() {
+		this.command.execute();
+	}
 
-    public void undo() {
-        this.command.undo();
-    }
+	public void undo() {
+		this.command.undo();
+	}
 
-    public void redo() {
-        this.command.redo();
-    }
+	public void redo() {
+		this.command.redo();
+	}
 
-    public Date getEffectiveDate() {
-        return this.effectiveDate;
-    }
+	public Date getEffectiveDate() {
+		return this.effectiveDate;
+	}
 }

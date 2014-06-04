@@ -8,21 +8,21 @@ public class LockValueCommission implements StrategyCommission {
 	 * Value of commision
 	 */
 	private final double VALUE;
-	
+
 	public LockValueCommission() {
-		this.VALUE  = 0;
+		this.VALUE = 0;
 	}
-	
+
 	public LockValueCommission(double value) throws CommissionException {
-		if(value < 0)
+		if (value < 0)
 			throw new CommissionException("Enter a positive value.");
-		
+
 		this.VALUE = value;
 	}
-	
+
 	@Override
 	public double calculateCommission() {
-		
+
 		return this.VALUE;
 	}
 

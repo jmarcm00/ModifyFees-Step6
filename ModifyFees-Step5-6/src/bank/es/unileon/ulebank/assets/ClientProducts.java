@@ -1,6 +1,5 @@
 package es.unileon.ulebank.assets;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,7 +12,7 @@ public class ClientProducts {
 	 */
 	private Client client;
 	/**
-	 * Arraylist for store the different financial products 
+	 * Arraylist for store the different financial products
 	 */
 	private ArrayList<FinancialProduct> financialProducts;
 
@@ -62,17 +61,16 @@ public class ClientProducts {
 	public FinancialProduct search(Handler handler) {
 		Iterator<FinancialProduct> iterator = this.financialProducts.iterator();
 		boolean found = false;
-		
+
 		FinancialProduct product = null;
-		
+
 		while (iterator.hasNext() && !found) {
 			product = iterator.next();
-			if(handler.compareTo(product.getId())==0){
+			if (handler.compareTo(product.getId()) == 0) {
 				found = true;
-			}	
+			}
 		}
-		
+
 		return product;
 	}
 }
-

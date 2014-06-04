@@ -9,33 +9,34 @@ package es.unileon.ulebank.handler;
  */
 public class GenericHandler implements Handler {
 
-    /**
-     * Generic id
-     */
-    private final String id;
+	/**
+	 * Generic id
+	 */
+	private final String id;
 
-    /**
-     * Create a new Generic Handler
-     *
-     * @param id (The id)
-     * @author runix
-     */
-    public GenericHandler(String id) {
-        this.id = id;
-    }
+	/**
+	 * Create a new Generic Handler
+	 *
+	 * @param id
+	 *            (The id)
+	 * @author runix
+	 */
+	public GenericHandler(String id) {
+		this.id = id;
+	}
 
-    @Override
-    public int compareTo(Handler another) {
-        return this.id.compareTo(another.toString());
-    }
+	@Override
+	public int compareTo(Handler another) {
+		return this.id.compareTo(another.toString());
+	}
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return this.id;
-    }
+	/**
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString() {
+		return this.id;
+	}
 
 }

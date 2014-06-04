@@ -11,30 +11,30 @@ import java.util.Date;
  */
 public interface Command {
 
-    /**
-     *
-     * @return
-     */
-    public Date getEffectiveDate();
+	/**
+	 *
+	 * @return
+	 */
+	public Date getEffectiveDate();
 
-    /**
-     *
-     * @return
-     */
-    public Handler getID();
+	/**
+	 *
+	 * @return
+	 */
+	public Handler getID();
 
-    /**
+	/**
      *
      */
-    public void execute();
+	public void execute();
 
-    /**
+	/**
      *
      */
-    public void undo();
+	public void undo();
 
-    /**
+	/**
      *
      */
-    public void redo();
+	public void redo();
 }
